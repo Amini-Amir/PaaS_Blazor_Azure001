@@ -7,27 +7,56 @@
     <div>
         <h1>Chess Counter</h1>
     </div>
+    <div><button class="btn btn-primary" @onclick="@startGame">Start the Game</button></div>
+    <hr class="my-4 w-100"/>
     <div class="d-flex align-items-center">
 
         <div class="d-flex align-items-center p-2 gap-2"><div class="bg-white border rounded" style="width: 50px; height: 50px;"></div>
-            <div>00:00</div>
-            <div><button class="btn btn-primary">start</button></div>
+            <div>@TimeSpan.FromSeconds(player1Timer).ToString(@"mm\:ss")</div>
+            <div><button class="btn btn-primary" disabled=@(!isPlayer1Turn) @onclick="@changePlayerTurn">Stop</button></div>
         </div>
 
         <div>|</div>
 
         <div class="d-flex align-items-center p-2 gap-2">
-        <div><button class="btn btn-primary">start</button></div>
-        <div>00:00</div>
+        <div><button class="btn btn-primary" disabled=@(!isPlayer2Turn) @onclick="@changePlayerTurn">Stop</button></div>
+        <div>@TimeSpan.FromSeconds(player2Timer).ToString(@"mm\:ss")</div>
         <div class="bg-dark border rounded" style="width: 50px; height: 50px;"></div></div>
     </div>
 </div>
 
 
 @code {
-    private int player1Timer = 0;
-    private int player2Timer = 0;
+    private int player1Timer = 10*60;
+    private int player2Timer = 10*60;
 
+    private bool isPlayer1Turn = false;
+    private bool isPlayer2Turn = false;
+
+    private void startGame(){
+        isPlayer1Turn = true;
+        isPlayer2Turn = false;
+        var timer = new System.Timers.Timer(1000);
+        timer.Elapsed += (sender, e) =>
+        {
+            if (isPlayer1Turn)
+            {
+                player1Timer--;
+            }
+            else
+            {
+                player2Timer--;
+            }
+            InvokeAsync(StateHasChanged);
+        };
+        timer.AutoReset = true;
+        timer.Enabled = true;
+    }
+
+    private void changePlayerTurn(){
+        isPlayer1Turn = !isPlayer1Turn;
+        isPlayer2Turn = !isPlayer2Turn;
+    }
     public class Player{
         public string name;
         public int time;
