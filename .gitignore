@@ -62,3 +62,12 @@ _ReSharper*/
 # OS generated
 .DS_Store
 Thumbs.db
+
+# NOTE: .gitignore is not retroactive. If files/folders were already committed,
+# run these commands at the repository root to remove them from tracking (they
+# will remain on disk) and apply .gitignore:
+#   git rm -r --cached .
+#   git add .
+#   git commit -m "Apply .gitignore"
+#   git push
+# Ensure this .gitignore is at the repo root; paths are matched relative to it.
