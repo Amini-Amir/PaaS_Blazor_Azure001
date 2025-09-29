@@ -1,0 +1,56 @@
+@rendermode InteractiveServer
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Fixed navbar</a>
+
+    <!-- Use Blazor onclick to control collapse instead of Bootstrap JS -->
+    <button class="navbar-toggler @(collapseOpen ? "" : "collapsed")"
+            type="button"
+            aria-controls="navbarCollapse"
+            aria-expanded="@collapseOpen.ToString().ToLowerInvariant()"
+            aria-label="Toggle navigation"
+            @onclick="ToggleCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse collapse@(collapseOpen ? " show" : "")" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <NavLink class="nav-link" href="" Match="NavLinkMatch.All" @onclick="CloseCollapse">
+            Home
+          </NavLink>
+        </li>
+        <li class="nav-item">
+          <NavLink class="nav-link" href="/todos" @onclick="CloseCollapse">
+            Todo
+          </NavLink>
+        </li>
+        <li class="nav-item">
+          <NavLink class="nav-link" href="/counter" @onclick="CloseCollapse">
+            Counter
+          </NavLink>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+@code {
+  private bool collapseOpen = false;
+
+  private void ToggleCollapse()
+  {
+    collapseOpen = !collapseOpen;
+  }
+
+  private void CloseCollapse()
+  {
+    collapseOpen = false;
+  }
+}
