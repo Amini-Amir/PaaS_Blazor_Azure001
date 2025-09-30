@@ -33,7 +33,7 @@ This project is a Blazor web application built with .NET 9.
 ## Useful Links
 
 - [Blazor Documentation](https://learn.microsoft.com/en-us/aspnet/core/blazor/)
-- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-aspnetcore)
+- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/quickstart-dotnetcore?tabs=net80&pivots=development-environment-vs)
 
 ## Notes
 
